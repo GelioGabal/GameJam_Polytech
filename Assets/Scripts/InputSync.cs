@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputSync:MonoBehaviour
 {
-    private static InputStstem input;
+    public static InputStstem input;
     private void Awake()
     {
         input=new InputStstem();
@@ -17,5 +17,6 @@ public class InputSync:MonoBehaviour
     {
         input.Disable();
     }
+
 
 }

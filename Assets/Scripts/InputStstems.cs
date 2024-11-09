@@ -35,6 +35,15 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""leftCkick"",
+                    ""type"": ""Button"",
+                    ""id"": ""5522e66f-3003-498a-9d73-158e01840a1b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +55,17 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";PC"",
                     ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4dbdbb4b-0868-41d0-bb7d-391e6db9abe7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""leftCkick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -74,6 +94,7 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
         // Standart
         m_Standart = asset.FindActionMap("Standart", throwIfNotFound: true);
         m_Standart_MousePos = m_Standart.FindAction("MousePos", throwIfNotFound: true);
+        m_Standart_leftCkick = m_Standart.FindAction("leftCkick", throwIfNotFound: true);
     }
 
     ~@InputStstem()
@@ -141,11 +162,13 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Standart;
     private List<IStandartActions> m_StandartActionsCallbackInterfaces = new List<IStandartActions>();
     private readonly InputAction m_Standart_MousePos;
+    private readonly InputAction m_Standart_leftCkick;
     public struct StandartActions
     {
         private @InputStstem m_Wrapper;
         public StandartActions(@InputStstem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePos => m_Wrapper.m_Standart_MousePos;
+        public InputAction @leftCkick => m_Wrapper.m_Standart_leftCkick;
         public InputActionMap Get() { return m_Wrapper.m_Standart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +181,9 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
+            @leftCkick.started += instance.OnLeftCkick;
+            @leftCkick.performed += instance.OnLeftCkick;
+            @leftCkick.canceled += instance.OnLeftCkick;
         }
 
         private void UnregisterCallbacks(IStandartActions instance)
@@ -165,6 +191,9 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
+            @leftCkick.started -= instance.OnLeftCkick;
+            @leftCkick.performed -= instance.OnLeftCkick;
+            @leftCkick.canceled -= instance.OnLeftCkick;
         }
 
         public void RemoveCallbacks(IStandartActions instance)
@@ -194,5 +223,6 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
     public interface IStandartActions
     {
         void OnMousePos(InputAction.CallbackContext context);
+        void OnLeftCkick(InputAction.CallbackContext context);
     }
 }
