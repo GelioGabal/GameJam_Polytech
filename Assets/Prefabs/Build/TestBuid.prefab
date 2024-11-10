@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2032488555920198482}
   - component: {fileID: -453965992715018122}
   - component: {fileID: -9064670847083408751}
-  - component: {fileID: 1357506615327341905}
   m_Layer: 0
   m_Name: TestBuid
   m_TagString: Untagged
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4126653434716707765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146.78621, y: 65.8896, z: 0}
+  m_LocalPosition: {x: 172.15668, y: 84.01135, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,6 +104,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 0
+  ColiderEnter: 0
 --- !u!61 &-9064670847083408751
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,16 +151,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1357506615327341905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126653434716707765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee03f4d12448c34428240b10408840bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayced: 0
