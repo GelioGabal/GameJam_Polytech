@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class APlaceController:MonoBehaviour
 {
-    BuildMovementController build = new BuildMovementController();
     public bool isPlayced;
 
 
