@@ -44,6 +44,15 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""36120a68-5780-41b3-a701-f0e1d0124a02"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,61 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""action"": ""leftCkick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b8cec10c-b70c-4ffd-bd74-5dd38093c3a2"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""93fdcfad-6b8d-45c0-80c6-40e604ffebce"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b0f130b7-7b21-4c19-9aec-c07885199765"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b4213789-32b4-46a5-b506-c6468b50c67e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""961b9ee8-d51b-425c-aac9-d0f6953f034a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -95,6 +159,7 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
         m_Standart = asset.FindActionMap("Standart", throwIfNotFound: true);
         m_Standart_MousePos = m_Standart.FindAction("MousePos", throwIfNotFound: true);
         m_Standart_leftCkick = m_Standart.FindAction("leftCkick", throwIfNotFound: true);
+        m_Standart_Movement = m_Standart.FindAction("Movement", throwIfNotFound: true);
     }
 
     ~@InputStstem()
@@ -163,12 +228,14 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
     private List<IStandartActions> m_StandartActionsCallbackInterfaces = new List<IStandartActions>();
     private readonly InputAction m_Standart_MousePos;
     private readonly InputAction m_Standart_leftCkick;
+    private readonly InputAction m_Standart_Movement;
     public struct StandartActions
     {
         private @InputStstem m_Wrapper;
         public StandartActions(@InputStstem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePos => m_Wrapper.m_Standart_MousePos;
         public InputAction @leftCkick => m_Wrapper.m_Standart_leftCkick;
+        public InputAction @Movement => m_Wrapper.m_Standart_Movement;
         public InputActionMap Get() { return m_Wrapper.m_Standart; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -184,6 +251,9 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
             @leftCkick.started += instance.OnLeftCkick;
             @leftCkick.performed += instance.OnLeftCkick;
             @leftCkick.canceled += instance.OnLeftCkick;
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
         }
 
         private void UnregisterCallbacks(IStandartActions instance)
@@ -194,6 +264,9 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
             @leftCkick.started -= instance.OnLeftCkick;
             @leftCkick.performed -= instance.OnLeftCkick;
             @leftCkick.canceled -= instance.OnLeftCkick;
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
         }
 
         public void RemoveCallbacks(IStandartActions instance)
@@ -224,5 +297,6 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
     {
         void OnMousePos(InputAction.CallbackContext context);
         void OnLeftCkick(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
     }
 }
