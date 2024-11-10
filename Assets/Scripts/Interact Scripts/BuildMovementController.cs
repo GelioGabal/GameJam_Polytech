@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BuildMovementController:MonoBehaviour
 {
@@ -33,8 +30,13 @@ public class BuildMovementController:MonoBehaviour
           
                 transform.position = new Vector2(transform.position.x, transform.position.y);
                 Destroy(gameObject.GetComponent<BuildMovementController>());
+<<<<<<< HEAD
             
 
+=======
+                //control.isPlayced = true;
+  
+>>>>>>> origin/main
         }
 
     }
