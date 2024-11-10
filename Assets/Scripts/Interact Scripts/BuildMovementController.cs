@@ -30,13 +30,7 @@ public class BuildMovementController:MonoBehaviour
           
                 transform.position = new Vector2(transform.position.x, transform.position.y);
                 Destroy(gameObject.GetComponent<BuildMovementController>());
-<<<<<<< HEAD
-            
 
-=======
-                //control.isPlayced = true;
-  
->>>>>>> origin/main
         }
 
     }
