@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ground:
     serializedVersion: 2
-    m_Bits: 494804992
+    m_Bits: 0
 --- !u!61 &-9064670847083408751
 BoxCollider2D:
   m_ObjectHideFlags: 0

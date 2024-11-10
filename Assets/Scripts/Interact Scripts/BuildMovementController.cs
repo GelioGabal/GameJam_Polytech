@@ -8,7 +8,6 @@ public class BuildMovementController:MonoBehaviour
 {
     [SerializeField] LayerMask ground;
     Camera cam;
-    APlaceController control = new APlaceController();
 
     private void Awake()
     {
@@ -34,10 +33,10 @@ public class BuildMovementController:MonoBehaviour
           
                 transform.position = new Vector2(transform.position.x, transform.position.y);
                 Destroy(gameObject.GetComponent<BuildMovementController>());
-                control.isPlayced = true;
-  
+            
+
         }
-        
+
     }
     
 
