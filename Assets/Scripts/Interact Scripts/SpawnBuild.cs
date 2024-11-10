@@ -7,6 +7,6 @@ public class SpawnBuild : MonoBehaviour
     {
 
             Instantiate(buld, Vector2.zero, Quaternion.Euler(0, 0, 0));
-        buld.transform.position = new Vector2(transform.position.x, transform.position.y);
+        buld.transform.position = InputSync.input.Standart.MousePos.ReadValue<Vector2>();
     }
 }
