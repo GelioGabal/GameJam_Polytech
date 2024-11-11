@@ -2,7 +2,7 @@
     "name": "InputStstem",
     "maps": [
         {
-            "name": "Standart",
+            "name": "Player",
             "id": "1e942c37-f826-46ff-8c60-49f7a6cce205",
             "actions": [
                 {
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "leftCkick",
+                    "name": "Place",
                     "type": "Button",
                     "id": "5522e66f-3003-498a-9d73-158e01840a1b",
                     "expectedControlType": "",
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
-                    "action": "leftCkick",
+                    "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

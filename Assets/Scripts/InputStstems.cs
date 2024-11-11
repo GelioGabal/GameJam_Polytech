@@ -24,7 +24,7 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
     ""name"": ""InputStstem"",
     ""maps"": [
         {
-            ""name"": ""Standart"",
+            ""name"": ""Player"",
             ""id"": ""1e942c37-f826-46ff-8c60-49f7a6cce205"",
             ""actions"": [
                 {
@@ -37,7 +37,7 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""leftCkick"",
+                    ""name"": ""Place"",
                     ""type"": ""Button"",
                     ""id"": ""5522e66f-3003-498a-9d73-158e01840a1b"",
                     ""expectedControlType"": """",
@@ -74,7 +74,7 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""leftCkick"",
+                    ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -155,16 +155,16 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Standart
-        m_Standart = asset.FindActionMap("Standart", throwIfNotFound: true);
-        m_Standart_MousePos = m_Standart.FindAction("MousePos", throwIfNotFound: true);
-        m_Standart_leftCkick = m_Standart.FindAction("leftCkick", throwIfNotFound: true);
-        m_Standart_Movement = m_Standart.FindAction("Movement", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
+        m_Player_Place = m_Player.FindAction("Place", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
     }
 
     ~@InputStstem()
     {
-        UnityEngine.Debug.Assert(!m_Standart.enabled, "This will cause a leak and performance issues, InputStstem.Standart.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputStstem.Player.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -223,67 +223,67 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Standart
-    private readonly InputActionMap m_Standart;
-    private List<IStandartActions> m_StandartActionsCallbackInterfaces = new List<IStandartActions>();
-    private readonly InputAction m_Standart_MousePos;
-    private readonly InputAction m_Standart_leftCkick;
-    private readonly InputAction m_Standart_Movement;
-    public struct StandartActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_MousePos;
+    private readonly InputAction m_Player_Place;
+    private readonly InputAction m_Player_Movement;
+    public struct PlayerActions
     {
         private @InputStstem m_Wrapper;
-        public StandartActions(@InputStstem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MousePos => m_Wrapper.m_Standart_MousePos;
-        public InputAction @leftCkick => m_Wrapper.m_Standart_leftCkick;
-        public InputAction @Movement => m_Wrapper.m_Standart_Movement;
-        public InputActionMap Get() { return m_Wrapper.m_Standart; }
+        public PlayerActions(@InputStstem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
+        public InputAction @Place => m_Wrapper.m_Player_Place;
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(StandartActions set) { return set.Get(); }
-        public void AddCallbacks(IStandartActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_StandartActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_StandartActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
-            @leftCkick.started += instance.OnLeftCkick;
-            @leftCkick.performed += instance.OnLeftCkick;
-            @leftCkick.canceled += instance.OnLeftCkick;
+            @Place.started += instance.OnPlace;
+            @Place.performed += instance.OnPlace;
+            @Place.canceled += instance.OnPlace;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
         }
 
-        private void UnregisterCallbacks(IStandartActions instance)
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
-            @leftCkick.started -= instance.OnLeftCkick;
-            @leftCkick.performed -= instance.OnLeftCkick;
-            @leftCkick.canceled -= instance.OnLeftCkick;
+            @Place.started -= instance.OnPlace;
+            @Place.performed -= instance.OnPlace;
+            @Place.canceled -= instance.OnPlace;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
         }
 
-        public void RemoveCallbacks(IStandartActions instance)
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_StandartActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IStandartActions instance)
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_StandartActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_StandartActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public StandartActions @Standart => new StandartActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -293,10 +293,10 @@ public partial class @InputStstem: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_PCSchemeIndex];
         }
     }
-    public interface IStandartActions
+    public interface IPlayerActions
     {
         void OnMousePos(InputAction.CallbackContext context);
-        void OnLeftCkick(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
     }
 }

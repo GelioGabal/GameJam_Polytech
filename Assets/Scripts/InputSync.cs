@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class InputSync:MonoBehaviour
 {
-    public static InputStstem input;
+    public static InputStstem Input;
+    static Camera cam;
     private void Awake()
     {
-        input=new InputStstem();
+        cam = Camera.main;
+        Input = new InputStstem();
     }
 
     private void OnEnable()
     {
-        input.Enable();
+        Input.Enable();
     }
 
     private void OnDisable()
     {
-        input.Disable();
+        Input.Disable();
     }
-
-
+    public static Vector2 MousePosition { get => cam.ScreenToWorldPoint(Input.Player.MousePos.ReadValue<Vector2>()); }
 }

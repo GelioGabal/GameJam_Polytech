@@ -3,75 +3,48 @@ using UnityEngine.InputSystem;
 
 public class BuildMovementController:MonoBehaviour
 {
-    [SerializeField] LayerMask ground;
-    Camera cam;
-    //APlaceController controller=new APlaceController();
-    public bool ColiderEnter = false;
-
-
-    /*   private void FixedUpdate()
-       {
-           if (gameObject.GetComponent<BuildMovementController>() == null)
-               isPlayced = true;
-       }*/
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField] bool ColiderEnter = false;
+    SpriteRenderer spriter;
+    Color startColor;
+    void Start()
     {
-        ColiderEnter = true;
+        spriter = GetComponent<SpriteRenderer>();
+        startColor = spriter.color;
+        InputSync.Input.Player.Place.performed += PlaceObject;
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnDisable()
     {
-        ColiderEnter = false;
+        InputSync.Input.Player.Place.performed -= PlaceObject;
     }
-
-    private void Awake()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-       
-        cam=Camera.main;
+        if (collision.CompareTag("Building")) ColiderEnter = true;
     }
-
-    private void BuildMovenent(Vector2 position)
+    void OnTriggerStay2D(Collider2D collision)
     {
-        position=cam.ScreenToWorldPoint(position);
-        transform.position = position;
-        
+        if (collision.CompareTag("Building")) ColiderEnter = true;
     }
-
-    
-
-    private void PlaceObject()
+    void OnTriggerExit2D(Collider2D collision)
     {
-        
-        BuildMovenent(InputSync.input.Standart.MousePos.ReadValue<Vector2>());
-        if (ColiderEnter==false)
+        if (collision.CompareTag("Building")) ColiderEnter = false;
+    }
+    void PlaceObject(InputAction.CallbackContext ctx)
+    {
+        if (!ColiderEnter)
         {
-            if (InputSync.input.Standart.leftCkick.IsPressed())
-            {
-
-                transform.position = new Vector2(transform.position.x, transform.position.y);
-                Destroy(gameObject.GetComponent<BuildMovementController>());
-                gameObject.AddComponent<Rigidbody2D>();
-                gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-
-
-            }
+            Destroy(this);
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            spriter.color = startColor;
         }
         else
         {
             Debug.Log("тут нельзя строить");
         }
-
     }
-    
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        
-        PlaceObject();
+        transform.position = InputSync.MousePosition;
+        spriter.color = (ColiderEnter) ? Color.red : Color.green;
     }
-
-
-
 }
