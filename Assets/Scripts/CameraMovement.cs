@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class CameraMovement:MonoBehaviour
 {
-    [SerializeField] private float _Speed;
-    Vector2 _Movement;
-    
-    private void FixedUpdate()
+    [SerializeField] float speed, scrollSpeed;
+    [SerializeField] float minZoom = 2, maxZoom = 15;
+    Camera cam;
+    void Start() => cam = GetComponent<Camera>();
+    void FixedUpdate()
     {
-        OnMovement(InputSync.Input.Player.Movement.ReadValue<Vector2>());
+        transform.Translate(InputSync.Input.Camera.Movement.ReadValue<Vector2>() * speed * Time.fixedDeltaTime);
+        cam.orthographicSize -= InputSync.Input.Camera.Zoom.ReadValue<Vector2>().normalized.y * scrollSpeed;
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
     }
-
-    private void OnMovement(Vector2 movement)
-    {
-        transform.position += new Vector3(movement.x, movement.y) * _Speed * Time.deltaTime;
-    }
-
 }

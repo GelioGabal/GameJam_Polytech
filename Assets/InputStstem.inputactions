@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "36120a68-5780-41b3-a701-f0e1d0124a02",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -55,10 +46,36 @@
                     "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "c2f7293b-d302-4453-85f3-ad9f355f5de0",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "0d722032-c26c-41e1-9cf4-893f51c450d9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "b8cec10c-b70c-4ffd-bd74-5dd38093c3a2",
+                    "name": "Zoom",
+                    "type": "PassThrough",
+                    "id": "10bccc28-c829-49d9-8de0-3f4ca9ee319f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "WASD",
+                    "id": "89b11550-111e-4d0d-9e82-f99c1f67fd79",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -69,47 +86,58 @@
                 },
                 {
                     "name": "up",
-                    "id": "93fdcfad-6b8d-45c0-80c6-40e604ffebce",
+                    "id": "c4baf925-83db-46df-b5ac-f33c0a7e2c47",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "b0f130b7-7b21-4c19-9aec-c07885199765",
+                    "id": "106966b9-3ee1-42dd-8159-36e8def3b074",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "b4213789-32b4-46a5-b506-c6468b50c67e",
+                    "id": "f656c7ea-50f4-4b1f-8604-6e5985fd15b9",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "961b9ee8-d51b-425c-aac9-d0f6953f034a",
+                    "id": "355752ea-15c8-4fd1-8ba3-96c476d8aa33",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6241e994-b8bf-409d-a5e1-41061c1e3bd9",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
